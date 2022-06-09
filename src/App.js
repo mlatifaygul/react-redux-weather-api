@@ -1,58 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Weather from './components/Weather'
+import "semantic-ui-css/semantic.min.css";
+import "./index.css";
+const App = () => {
+  const [weather, setWeather] = useState();
 
-function App() {
+  const getWeatherData = async () => {
+    //const key = process.env.REACT_APP_WEATHER_API_KEY;
+
+
+    try {
+      const { data } = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=ANKARA&lang=tr&units=metric&appid=79d77bf409e84e6b3dd0b3ddcdff88da`
+      );
+      setWeather(data);
+      
+    } catch {
+      alert("Veri alinirken hata olustu.");
+    }
+  };
+  console.log(weather)
+
+  useEffect(() => {
+    getWeatherData();
+  }, []);
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className="app">
+      <Weather weather={weather}/>
     </div>
   );
-}
+};
 
 export default App;
