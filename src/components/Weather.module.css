@@ -4,9 +4,13 @@ p {
   font-family: sans-serif;
 }
 pre {
-    font-size: 14px;
-    font-weight: 600;
-    font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: sans-serif;
+}
+.darkMode {
+  background-color: black;
+  color: white;
 }
 .bodyWeather p {
   font-size: larger;
@@ -19,48 +23,81 @@ pre {
   text-align: center;
   height: 100%;
   margin: 0 auto;
-  box-sizing: border-box;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  text-overflow: hidden;
 }
 .navLink {
   border: 1px solid rgba(72, 71, 71, 0.33);
   position: absolute;
-  margin-top: 20px;
+  margin-top: 1.2em;
   border-radius: 4px;
   z-index: 1;
   background-color: white;
-  width: 60em;
+  width: 65em;
   height: 3.5em;
   box-shadow: 2px 2px 2px rgba(59, 58, 58, 0.508);
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  background-color: rgb(255, 250, 250);
 }
+.navLink ul {
+  display: flex;
+  flex-flow: row wrap;
+  list-style-type: none;
+  font-size: 1.4em;
+  font-weight: 600;
+  align-items: center;
+  margin-left: 1em;
+  padding: 0;
+}
+.navLink li {
+  width: 7.4em;
+  display: flex;
+  flex-direction: column;
+  margin-left: -22px;
+  margin-top: 1px;
+  padding: 14px 0px;
+  cursor: pointer;
+}
+.navLink li:hover {
+  background-color: rgba(0, 0, 0, 0.241);
+  box-shadow: 2px 2px 2px rgba(59, 58, 58, 0.508);
+}
+
 .inBox {
   margin-top: 3em;
   border: 1px solid rgba(72, 71, 71, 0.33);
   border-radius: 4px;
-  height: 75vh;
-  width: 76em;
+  height: 40em;
+  width: 80em;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
   box-shadow: 2px 2px 2px rgba(59, 58, 58, 0.508);
-  background-color: rgba(255, 250, 250, 0.333);
+  background-color: rgba(255, 250, 250, 0.535);
+  text-overflow: hidden;
 }
 .weatherBox {
   display: flex;
   flex-flow: column wrap;
   row-gap: 10px;
+  text-overflow: hidden;
 }
 
 .weather {
   border: 1px solid rgba(72, 71, 71, 0.33);
   width: 23em;
-  height: 34em;
+  height: 35em;
   border-radius: 4px;
   box-shadow: 2px 2px 2px rgba(59, 58, 58, 0.508);
   box-sizing: border-box;
   background-color: white;
+  margin-top: 2em;
+  text-overflow: hidden;
 }
 .headerWeather {
   border-bottom: 1px solid rgba(72, 71, 71, 0.33);
@@ -68,6 +105,7 @@ pre {
   height: 2.8em;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .footerWeather {
   display: flex;
@@ -76,14 +114,14 @@ pre {
   align-items: flex-start;
   margin-left: -35px;
 }
-ul li {
+.footerWeather ul li {
   list-style: none;
   text-align: center;
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(72, 71, 71, 0.33);
-  margin-bottom: -8px;
-  margin-top: 3px;
+  margin-bottom: -2px;
+  margin-top: 1px;
 }
 
 .icons {
@@ -99,20 +137,21 @@ ul li {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  column-gap: 30px;
+  column-gap: 25px;
 }
 .weatherImg {
   width: 8em;
-  height: 58m;
+  height: 8em;
 }
 
 .hoursWeatherBox {
   border: 1px solid rgba(72, 71, 71, 0.33);
   background-color: white;
   border-radius: 4px;
-  height: 30vh;
-  width: 50em;
+  height: 16em; /*30 -101 vh */
+  width: 54em;
   box-shadow: 2px 2px 2px rgba(59, 58, 58, 0.508);
+  margin-top: 2em;
 }
 .listSingle {
   margin-top: -14px;
@@ -123,8 +162,8 @@ ul li {
 }
 .singleHours {
   border-right: 1px solid rgba(72, 71, 71, 0.33);
-  width: 17vh;
-  height: 21vh;
+  width: 10.6em;
+  height: 11em;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -133,23 +172,41 @@ ul li {
 }
 
 .singleHours p {
-    margin-top: -15px;
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: -10px;
+  margin-top: -15px;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: -10px;
+}
+.singleDay p {
+  margin-top: -15px;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: -10px;
 }
 
 .singleHours img {
-    margin-top: -10px;
-    margin-bottom: 0;
+  margin-top: -10px;
+  margin-bottom: 0;
+}
+.singleDay img {
+  margin-top: -10px;
+  margin-bottom: 0;
 }
 .daysWeatherBox {
   border: 1px solid rgba(72, 71, 71, 0.33);
   background-color: white;
   border-radius: 4px;
-  width: 50em;
-  height: 30vh;
+  width: 54em;
+  height: 18em; /* 101- 33.5 vh */
   box-shadow: 2px 2px 2px rgba(59, 58, 58, 0.508);
+  text-overflow: hidden;
+}
+.singleDay {
+  border-right: 1px solid rgba(72, 71, 71, 0.33);
+  width: 10.6em;
+  height: 11em; /* 20- 23 vh */
+  margin-top: 6px;
+  text-overflow: hidden;
 }
 .bg {
   max-width: 100%;
@@ -160,19 +217,19 @@ ul li {
   z-index: -1;
 }
 button {
-    background-color: #1b4de4;
-    color: white;
-    outline: none;
-    border: none;
-    border-radius: 14px;
-    padding: 7px 16px;
-    cursor: pointer;
-    font-weight: 600;
-    margin: 3px;
-    margin-right: 68.5vh;
-    opacity: 0.9;
+  background-color: #1b4de4;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 14px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 3px;
+  margin-right: 43em;
+  opacity: 0.9;
 }
-button:hover{
-    opacity: 1;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.467);
+button:hover {
+  opacity: 1;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.467);
 }

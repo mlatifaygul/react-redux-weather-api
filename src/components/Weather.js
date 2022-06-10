@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import styles from "./Weather.module.css";
 import images from "../app/img";
-import { Button } from "semantic-ui-react";
+import { useState } from "react";
 
-const Weather = (props) => {
+export const Weather = (props) => {
   const { weather } = props;
   if (!weather) {
     return <p>You need to allow location access....</p>;
@@ -12,8 +12,32 @@ const Weather = (props) => {
   const data = weather.list[0];
   const date = data.dt_txt.split("-");
   const descStyle = {
-    fontSize: "18px", marginTop: "-25px" 
-  }
+    fontSize: "18px",
+    marginTop: "-25px",
+  };
+
+ 
+
+  const getDayName = (no) => {
+    var days = [
+      "Pazar",
+      "Pazartesi",
+      "Salı",
+      "Çarşamba",
+      "Perşembe",
+      "Cuma",
+      "Cumartesi",
+    ];
+    var d = new Date(weather.list[no].dt * 1000);
+    var dayName = days[d.getDay()];
+    return dayName;
+  };
+
+  const dayName = (no) => {
+    return `${getDayName(no)} ${
+      weather.list[no].dt_txt.split("-")[2].split(" ")[0]
+    }`;
+  };
 
   const getIcon = (no) => {
     return weather.list[no].weather[0].icon;
@@ -26,15 +50,63 @@ const Weather = (props) => {
   };
   const getDesc = (no) => {
     return weather.list[no].weather[0].description;
-  }
+  };
   const getIconLink = (no) => {
-    return `http://openweathermap.org/img/wn/${getIcon(no)}@2x.png`
+    return `http://openweathermap.org/img/wn/${getIcon(no)}@2x.png`;
+  };
+  const getTempMax = (no) => {
+    return Math.round(weather.list[no].main.temp_max);
+  };
+  const getTempMin = (no) => {
+    return Math.round(weather.list[no].main.temp_min);
+  };
+
+  const getLocation = `${weather.city.name}-${weather.city.country}`
+
+  const darkMode = () => {
+    return "darkMode"
   }
+  console.log(darkMode())
+
 
   return (
     <div className={styles.container}>
       <img src={images.diego} className={styles.bg}></img>
-      <div className={styles.navLink}></div>
+      {
+        <div
+          className={styles.navLink}
+          // style={{
+          //         backgroundImage: `url(${images.bgCloud})`, //   backgroundPosition: "center",
+          //         backgroundSize: "cover",
+          //         backgroundRepeat: "no-repeat",
+          //       }}
+        >
+          <ul>
+            <li style={{"margin-right":"20px", padding:"4px 0px", paddingLeft:"10px"}}>
+              {getLocation}
+              <p>(Sizin Konumunuz)</p>
+            </li>
+            <li>
+              Menu1
+            </li>
+            <li>
+              Menu1
+            </li>
+            <li>
+              Menu1
+            </li>
+            <li>
+              Menu1
+            </li>
+            <li>
+              Menu1
+            </li>
+          </ul>
+          <div style={{marginRight:"0.5em"}}>
+            <p>Dark</p>
+          </div>
+        </div>
+      }
       <div className={styles.inBox}>
         <div
           className={styles.weather}
@@ -60,10 +132,10 @@ const Weather = (props) => {
                 "margin-top": "3px",
               }}
             >
-              {weather.city.name}-{weather.city.country}
+              {getLocation}
             </h2>
             <p style={{ "margin-top": "10px" }}>
-              {date[1]}/{date[2].split(" ")[1].slice(0, -3)}
+              {dayName(0)}/{date[2].split(" ")[1].slice(0, -3)}
             </p>
           </div>
           <div className={styles.bodyWeather}>
@@ -122,65 +194,114 @@ const Weather = (props) => {
         </div>
         <div className={styles.weatherBox}>
           <div className={styles.hoursWeatherBox}>
-            <h2 style={{"margin-right":"65vh"}}>Saatlik Tahmin</h2>
+            <h2
+              style={{
+                "margin-right": "26.6em",
+                fontSize: "22px",
+                "margin-top": "2px",
+              }}
+            >
+              Saatlik Tahmin
+            </h2>
             <div className={styles.listSingle}>
               <div className={styles.singleHours}>
                 <h3>Şimdi</h3>
                 <p>{getTemp(0)}°C</p>
-                <img
-                  src={getIconLink(0)}
-                  className={styles.weatherImg}
-                ></img>
+                <img src={getIconLink(0)} className={styles.weatherImg}></img>
                 <p style={descStyle}>{getDesc(0)}</p>
               </div>
               <div className={styles.singleHours}>
-                <h3>
-                  {getDate(1)}
-                </h3>
+                <h3>{getDate(1)}</h3>
                 <p>{getTemp(1)}°C</p>
-                <img
-                  src={getIconLink(1)}
-                  className={styles.weatherImg}
-                ></img>
+                <img src={getIconLink(1)} className={styles.weatherImg}></img>
                 <p style={descStyle}>{getDesc(1)}</p>
               </div>
               <div className={styles.singleHours}>
-                <h3>
-                  {getDate(2)}
-                </h3>
+                <h3>{getDate(2)}</h3>
                 <p>{getTemp(2)}°C</p>
-                <img
-                  src={getIconLink(2)}
-                  className={styles.weatherImg}
-                ></img>
+                <img src={getIconLink(2)} className={styles.weatherImg}></img>
                 <p style={descStyle}>{getDesc(2)}</p>
               </div>
               <div className={styles.singleHours}>
-                <h3>
-                  {getDate(3)}
-                </h3>
+                <h3>{getDate(3)}</h3>
                 <p>{getTemp(3)}°C</p>
-                <img
-                  src={getIconLink(3)}
-                  className={styles.weatherImg}
-                ></img>
+                <img src={getIconLink(3)} className={styles.weatherImg}></img>
                 <p style={descStyle}>{getDesc(3)}</p>
               </div>
-              <div className={styles.singleHours} style={{"border-right":"none"}}>
-                <h3>
-                  {getDate(4)}
-                </h3>
+              <div
+                className={styles.singleHours}
+                style={{ "border-right": "none" }}
+              >
+                <h3>{getDate(4)}</h3>
                 <p>{getTemp(4)}°C</p>
-                <img
-                  src={getIconLink(4)}
-                  className={styles.weatherImg}
-                ></img>
+                <img src={getIconLink(4)} className={styles.weatherImg}></img>
                 <p style={descStyle}>{getDesc(4)}</p>
               </div>
             </div>
             <button>Sonraki Saatler</button>
           </div>
-          <div className={styles.daysWeatherBox}></div>
+          <div className={styles.daysWeatherBox}>
+            <h2
+              style={{
+                "margin-right": "26.5em",
+                fontSize: "22px",
+                "margin-top": "2px",
+              }}
+            >
+              Günlük Tahmin
+            </h2>
+            <div className={styles.listSingle}>
+              <div className={styles.singleDay}>
+                <h3 style={{ marginTop: "3px" }}>{dayName(0)}</h3>
+                <p style={{ marginTop: "-15px" }}>{getTempMax(0)}°C</p>
+                <p style={{ fontSize: "16px", marginTop: "4px" }}>
+                  {getTempMin(0)}°C
+                </p>
+                <img src={getIconLink(0)} className={styles.weatherImg}></img>
+                <p style={descStyle}>{getDesc(0)}</p>
+              </div>
+              <div className={styles.singleDay}>
+                <h3 style={{ marginTop: "3px" }}>{dayName(8)}</h3>
+                <p style={{ marginTop: "-15px" }}>{getTempMax(8)}°C</p>
+                <p style={{ fontSize: "16px", marginTop: "4px" }}>
+                  {getTempMin(8)}°C
+                </p>
+                <img src={getIconLink(8)} className={styles.weatherImg}></img>
+                <p style={descStyle}>{getDesc(8)}</p>
+              </div>
+              <div className={styles.singleDay}>
+                <h3 style={{ marginTop: "3px" }}>{dayName(16)}</h3>
+                <p style={{ marginTop: "-15px" }}>{getTempMax(16)}°C</p>
+                <p style={{ fontSize: "16px", marginTop: "4px" }}>
+                  {getTempMin(16)}°C
+                </p>
+                <img src={getIconLink(16)} className={styles.weatherImg}></img>
+                <p style={descStyle}>{getDesc(16)}</p>
+              </div>
+              <div className={styles.singleDay}>
+                <h3 style={{ marginTop: "3px" }}>{dayName(24)}</h3>
+                <p style={{ marginTop: "-15px" }}>{getTempMax(24)}°C</p>
+                <p style={{ fontSize: "16px", marginTop: "4px" }}>
+                  {getTempMin(24)}°C
+                </p>
+                <img src={getIconLink(24)} className={styles.weatherImg}></img>
+                <p style={descStyle}>{getDesc(24)}</p>
+              </div>
+              <div
+                className={styles.singleDay}
+                style={{ "border-right": "none" }}
+              >
+                <h3 style={{ marginTop: "3px" }}>{dayName(32)}</h3>
+                <p style={{ marginTop: "-15px" }}>{getTempMax(32)}°C</p>
+                <p style={{ fontSize: "16px", marginTop: "4px" }}>
+                  {getTempMin(32)}°C
+                </p>
+                <img src={getIconLink(32)} className={styles.weatherImg}></img>
+                <p style={descStyle}>{getDesc(32)}</p>
+              </div>
+            </div>
+            <button style={{ marginTop: "1.8em" }}>Sonraki Saatler</button>
+          </div>
         </div>
       </div>
     </div>
