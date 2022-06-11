@@ -3,20 +3,22 @@ import { useEffect, useState } from "react";
 import Weather from "./components/Weather";
 import "./index.css";
 const App = () => {
-  const [weather, setWeather] = useState();
+  const key = process.env.REACT_APP_WEATHER_API_KEY;
+  const [tr, setTr] = useState();
 
   const getWeatherData = async () => {
     //const key = process.env.REACT_APP_WEATHER_API_KEY;
 
     try {
       const { data } = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=ANKARA&lang=tr&units=metric&appid=79d77bf409e84e6b3dd0b3ddcdff88da`
+        `https://api.openweathermap.org/data/2.5/forecast?q=istanbul&lang=tr&units=metric&appid=${key}`
       );
-      setWeather(data);
+      setTr(data);
     } catch {
       alert("Veri alinirken hata olustu.");
     }
   };
+  
 
   useEffect(() => {
     getWeatherData();
@@ -24,7 +26,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Weather weather={weather} />
+      <Weather weather={tr} />
     </div>
   );
 };

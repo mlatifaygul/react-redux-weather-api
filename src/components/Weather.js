@@ -1,10 +1,16 @@
 /* eslint-disable jsx-a11y/alt-text */
 import styles from "./Weather.module.css";
 import images from "../app/img";
-import { useState } from "react";
+import { ThemeContext } from "../features/theme/theme";
+import { useContext } from "react";
+import "./toggle.css";
 
 export const Weather = (props) => {
   const { weather } = props;
+
+
+  const [{ theme, isDark }, toggleTheme] = useContext(ThemeContext);
+
   if (!weather) {
     return <p>You need to allow location access....</p>;
   }
@@ -12,11 +18,9 @@ export const Weather = (props) => {
   const data = weather.list[0];
   const date = data.dt_txt.split("-");
   const descStyle = {
-    fontSize: "18px",
-    marginTop: "-25px",
+    fontSize: "14px",
+    marginTop: "-20px",
   };
-
- 
 
   const getDayName = (no) => {
     var days = [
@@ -61,12 +65,7 @@ export const Weather = (props) => {
     return Math.round(weather.list[no].main.temp_min);
   };
 
-  const getLocation = `${weather.city.name}-${weather.city.country}`
-
-  const darkMode = () => {
-    return "darkMode"
-  }
-  console.log(darkMode())
+  const getLocation = `${weather.city.name}-${weather.city.country}`;
 
 
   return (
@@ -75,6 +74,7 @@ export const Weather = (props) => {
       {
         <div
           className={styles.navLink}
+          style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
           // style={{
           //         backgroundImage: `url(${images.bgCloud})`, //   backgroundPosition: "center",
           //         backgroundSize: "cover",
@@ -82,32 +82,94 @@ export const Weather = (props) => {
           //       }}
         >
           <ul>
-            <li style={{"margin-right":"20px", padding:"4px 0px", paddingLeft:"10px"}}>
+            <li
+              style={{
+                "margin-right": "20px",
+                padding: "4px 0px",
+                paddingLeft: "10px",
+              }}
+            >
               {getLocation}
               <p>(Sizin Konumunuz)</p>
             </li>
-            <li>
-              Menu1
-            </li>
-            <li>
-              Menu1
-            </li>
-            <li>
-              Menu1
-            </li>
-            <li>
-              Menu1
-            </li>
-            <li>
-              Menu1
-            </li>
+            <li>Menu1</li>
+            <li>Menu1</li>
+            <li>Menu1</li>
+            <li>Menu1</li>
+            <li>Menu1</li>
           </ul>
-          <div style={{marginRight:"0.5em"}}>
-            <p>Dark</p>
+          <div className={styles.checkBox}>
+            {/* <div className="text">It's a {isDark ? "Dark" : "Light"} theme</div>
+            <button type="button" onClick={toggleTheme}>
+              Toggle theme
+            </button> */}
+            <label for="checkbox">
+              <input
+                type="checkbox"
+                name=""
+                onClick={toggleTheme}
+                id="checkbox"
+              />
+              <div class="toggle">
+                <svg
+                  id="graphic"
+                  viewBox="0 0 132.29 132.29"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="sung">
+                    <path
+                      id="sun"
+                      d="m99.722 66.146a33.576 33.576 0 0 1-33.576 33.576 33.576 33.576 0 0 1-33.576-33.576 33.576 33.576 0 0 1 33.576-33.576 33.576 33.576 0 0 1 33.576 33.576"
+                    />
+                    <g
+                      id="sunshine"
+                      transform="matrix(.92602 0 0 .92602 -10.774 -58.541)"
+                    >
+                      <path
+                        transform="matrix(0 .58145 -.59067 0 145.26 159.26)"
+                        d="m-19.4 32.282h-45.867l22.934-39.722z"
+                      />
+                      <path
+                        transform="matrix(-.41115 .41115 -.41766 -.41766 109.64 196.03)"
+                        d="m-19.4 32.282h-45.867l22.934-39.722z"
+                      />
+                      <path
+                        transform="matrix(-.58145 0 0 -.59067 58.451 196.84)"
+                        d="m-19.4 32.282h-45.867l22.934-39.722z"
+                      />
+                      <path
+                        transform="matrix(-.41115 -.41115 .41766 -.41766 21.685 161.22)"
+                        d="m-19.4 32.282h-45.867l22.934-39.722z"
+                      />
+                      <path
+                        transform="matrix(0 -.58145 .59067 0 20.875 110.03)"
+                        d="m-19.4 32.282h-45.867l22.934-39.722z"
+                      />
+                      <path
+                        transform="matrix(.41115 -.41115 .41766 .41766 56.495 73.269)"
+                        d="m-19.4 32.282h-45.867l22.934-39.722z"
+                      />
+                      <path
+                        transform="matrix(.58145 0 0 .59067 107.68 72.459)"
+                        d="m-19.4 32.282h-45.867l22.934-39.722z"
+                      />
+                      <path
+                        transform="matrix(.41115 .41115 -.41766 .41766 144.45 108.08)"
+                        d="m-19.4 32.282h-45.867l22.934-39.722z"
+                      />
+                    </g>
+                  </g>
+                  <path
+                    id="croissant"
+                    d="m55.461 34.281a33.587 33.587 0 0 0-22.874 31.832 33.587 33.587 0 0 0 33.587 33.587 33.587 33.587 0 0 0 30.441-19.395 31.187 31.187 0 0 1-17.268 5.2174 31.187 31.187 0 0 1-31.187-31.187 31.187 31.187 0 0 1 7.3022-20.053z"
+                  />
+                </svg>
+              </div>
+            </label>
           </div>
         </div>
       }
-      <div className={styles.inBox}>
+      <div className={styles.inBox} style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
         <div
           className={styles.weather}
           // style={{
@@ -117,6 +179,7 @@ export const Weather = (props) => {
           //   backgroundRepeat: "no-repeat",
           //   backgroundColor: 'rgba(1, 1, 1, 0.8)'
           // }}
+          style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
         >
           <div
             className={styles.headerWeather}
@@ -193,7 +256,13 @@ export const Weather = (props) => {
           </div>
         </div>
         <div className={styles.weatherBox}>
-          <div className={styles.hoursWeatherBox}>
+          <div
+            className={styles.hoursWeatherBox}
+            style={{
+              backgroundColor: theme.backgroundColor,
+              color: theme.color,
+            }}
+          >
             <h2
               style={{
                 "margin-right": "26.6em",
@@ -240,7 +309,13 @@ export const Weather = (props) => {
             </div>
             <button>Sonraki Saatler</button>
           </div>
-          <div className={styles.daysWeatherBox}>
+          <div
+            className={styles.daysWeatherBox}
+            style={{
+              backgroundColor: theme.backgroundColor,
+              color: theme.color,
+            }}
+          >
             <h2
               style={{
                 "margin-right": "26.5em",
@@ -252,7 +327,7 @@ export const Weather = (props) => {
             </h2>
             <div className={styles.listSingle}>
               <div className={styles.singleDay}>
-                <h3 style={{ marginTop: "3px" }}>{dayName(0)}</h3>
+                <h3 style={{ marginTop: "3px" }}>Bugün</h3>
                 <p style={{ marginTop: "-15px" }}>{getTempMax(0)}°C</p>
                 <p style={{ fontSize: "16px", marginTop: "4px" }}>
                   {getTempMin(0)}°C
