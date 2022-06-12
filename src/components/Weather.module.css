@@ -43,6 +43,7 @@ pre {
   justify-content: center;
   background-color: rgb(255, 250, 250);
   opacity: 0.9;
+
 }
 .navLink ul {
   display: flex;
@@ -62,6 +63,9 @@ pre {
   margin-top: 1px;
   padding: 14px 0px;
   cursor: pointer;
+  transition: 0.2s;
+
+
 }
 .navLink li:hover {
   background-color: #15abddab;
@@ -95,12 +99,18 @@ pre {
   width: 23em;
   height: 35em;
   border-radius: 4px;
-  box-shadow: 2px 2px 2px rgba(86, 85, 85, 0.601);
+  box-shadow: 1px 1px 2px rgba(86, 85, 85, 0.601);
   box-sizing: border-box;
   background-color: white;
   margin-top: 2em;
   text-overflow: hidden;
+  transition: 0.3s;
 }
+.weather:hover {
+  box-shadow: 2px 2px 25px rgba(72, 71, 71, 0.33);  
+
+}
+
 .headerWeather {
   border-bottom: 1px solid rgba(72, 71, 71, 0.33);
   width: 100%;
@@ -171,6 +181,10 @@ pre {
   justify-content: center;
   align-items: center;
   text-align: center;
+  transition: 0.3s;
+}
+.singleHours:hover {
+  box-shadow: 2px 2px 5px rgba(72, 71, 71, 0.33);
 }
 
 .singleHours p {
@@ -206,9 +220,13 @@ pre {
 .singleDay {
   border-right: 1px solid rgba(72, 71, 71, 0.33);
   width: 10.6em;
-  height: 11em; /* 20- 23 vh */
+  height: 12.5em; /* 20- 23 vh */
   margin-top: 6px;
   text-overflow: hidden;
+  transition: 0.3s;
+}
+.singleDay:hover {
+  box-shadow: 2px 2px 5px rgba(72, 71, 71, 0.33);
 }
 .bg {
   max-width: 100%;
@@ -230,6 +248,7 @@ button {
   margin: 3px;
   margin-right: 43em;
   opacity: 0.9;
+  transition: 0.2s;
 }
 button:hover {
   opacity: 1;

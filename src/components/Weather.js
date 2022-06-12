@@ -8,7 +8,6 @@ import "./toggle.css";
 export const Weather = (props) => {
   const { weather } = props;
 
-
   const [{ theme, isDark }, toggleTheme] = useContext(ThemeContext);
 
   if (!weather) {
@@ -66,7 +65,6 @@ export const Weather = (props) => {
   };
 
   const getLocation = `${weather.city.name}-${weather.city.country}`;
-
 
   return (
     <div className={styles.container}>
@@ -169,7 +167,10 @@ export const Weather = (props) => {
           </div>
         </div>
       }
-      <div className={styles.inBox} style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+      <div
+        className={styles.inBox}
+        style={{ backgroundColor: theme.backgroundColor, color: theme.color }}
+      >
         <div
           className={styles.weather}
           // style={{
@@ -375,7 +376,7 @@ export const Weather = (props) => {
                 <p style={descStyle}>{getDesc(32)}</p>
               </div>
             </div>
-            <button style={{ marginTop: "1.8em" }}>Sonraki Saatler</button>
+            <button>Sonraki Saatler</button>
           </div>
         </div>
       </div>
