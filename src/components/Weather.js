@@ -1,8 +1,8 @@
-/* eslint-disable jsx-a11y/alt-text */
 import styles from "./Weather.module.css";
+/* eslint-disable jsx-a11y/alt-text */
 import images from "../app/img";
 import { ThemeContext } from "../features/theme/theme";
-import { useContext } from "react";
+import { useContext,  } from "react";
 import "./toggle.css";
 
 export const Weather = (props) => {
@@ -308,6 +308,7 @@ export const Weather = (props) => {
                 <p style={descStyle}>{getDesc(4)}</p>
               </div>
             </div>
+  
             <button>Sonraki Saatler</button>
           </div>
           <div

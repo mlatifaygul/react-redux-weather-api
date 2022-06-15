@@ -25,8 +25,9 @@ const App = () => {
   }, []);
 
   return (
+
     <div className="app">
-      <Weather weather={tr} />
+      <Weather weather={tr}/>
     </div>
   );
 };
